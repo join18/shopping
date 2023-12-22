@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      list-style: none;
+    }
+    #box {
+      width: 1100px;
+      min-height: 800px;
+      margin: 50px auto;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #header {
+      width: 100%;
+      height: 860px;
+    }
+    #header ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+    #header li {
+      width: 250px;
+      height: 400px;
+      border: 1px solid #e7e7e7;
+      font-size: 13px;
+      margin-top: 19px;
+      color: #999;
+    }
+    img {
+      width: 250px;
+      height: 250px;
+    }
+    #one {
+      width: 50px;
+      height: 20px;
+      background-image: linear-gradient(270deg, #e456ff 0, #ff31a3 100%);
+      border-radius: 15px;
+      text-align: center;
+      line-height: 20px;
+      display: inline-block;
+    }
+    #si {
+      font-size: 16px;
+      font-weight: 600;
+      color: black;
+    }
+    #pi {
+      margin-top: 10px;
+    }
+    #pr {
+      margin-top: 10px;
+      color: #666;
+    }
+    #describe {
+      width: 225px;
+      height: 100px;
+      padding: 13px;
+    }
+    #indent {
+      width: 1060px;
+      min-height: 300px;
+      padding: 19px;
+    }
+    #indent-one {
+      width: 100%;
+      height: 50px;
+      border-bottom: 1px solid #666;
+    }
+    #indent-one p {
+      color: rgb(221, 48, 140);
+      font-weight: 600;
+      line-height: 50px;
+    }
+    #indent-one-e {
+      text-align: center;
+      width: 150px;
+      height: 49px;
+      border-bottom: 2px solid rgb(221, 48, 140);
+    }
+    #indent-two {
+      width: 100%;
+      height: 70px;
+      line-height: 70px;
+      color: #999;
+      font-size: 14px;
+    }
+    #sr {
+      color: black;
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table img {
+      width: 80px;
+      height: 80px;
+      float: left;
+    }
+    tr,
+    th {
+      height: 40px;
+    }
+    td {
+      text-align: center;
+      height: 100px;
+    }
+    th {
+      border: #999;
+      background-color: #e7e7e7;
+    }
+    #state {
+      width: 20px;
+      height: 20px;
+      float: left;
+      margin: 30px 15px;
+    }
+    tbody td:first-child {
+      width: 450px;
+    }
+    #size {
+      margin-left: 10px;
+      width: 280px;
+      height: 60px;
+      padding-top: 20px;
+      font-size: 14px;
+      float: left;
+    }
+    #q {
+      color: #ff31a3;
+    }
+
+    tbody button {
+      width: 30px;
+      height: 20px;
+    }
+    #delBtn {
+      width: 70px;
+      height: 30px;
+    }
+    #footer {
+      width: 100%;
+      height: 50px;
+      border: 1px solid #666;
+      margin-top: 30px;
+    }
+    #footer-bottom {
+      width: 100%;
+      height: 50px;
+      background-color: #e7e7e7;
+      line-height: 50px;
+    }
+    #footer-bottom button {
+      width: 150px;
+      height: 50px;
+      color: white;
+      float: right;
+      background-color: #ff31a3;
+      border: none;
+    }
+    #amount {
+      margin: 0 15px 0 750px;
+    }
+  </style>
+  <body>
+    <div id="box">
+      <div id="header">
+        <ul>
+          <li v-for="(item,index) in shop" @click="addFun(index)">
+            <img :src="item.img" alt="" />
+            <div id="describe">
+              <div id="one">
+                <span>特卖价</span>
+              </div>
+              <span id="si">￥{{item.price}}</span>
+              <del>￥{{item.oldprice}}</del>
+              <span>3.1折</span>
+              <p id="pi">60天历史低价</p>
+              <p id="pr">{{item.describe}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div id="indent">
+        <div id="indent-one">
+          <div id="indent-one-e">
+            <p>特卖商品 19 ：18</p>
+          </div>
+        </div>
+        <div id="indent-two">
+          <span id="sr">配送至</span> <span id="si">郑州市</span>&nbsp;&nbsp;
+          |&nbsp;&nbsp; 勾选商品“ √
+          ”即可锁定库存20分钟，倒计时内不用担心商品被抢走~
+        </div>
+        <div id="indent-four">
+          <table border="1">
+            <thead>
+              <tr>
+                <th>商品</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody v-for="(item,index) in shop1">
+              <tr>
+                <td>
+                  <input
+                    type="checkbox"
+                    id="state"
+                    checked="item.stats"
+                    @click="check(index)"
+                  />
+                  <img :src="item.img" alt="" />
+                  <div id="size">
+                    <span id="ss">{{item.describe}}</span>
+                  </div>
+                </td>
+                <td id="q">¥{{item.price}}</td>
+                <td>
+                  <button @click="minus(index)">-</button
+                  >&emsp;<span>{{item.num}}</span>&emsp;<button
+                    @click="add(index)"
+                  >
+                    +
+                  </button>
+                </td>
+                <td>
+                  <button @click="delFun(index)" id="delBtn">删除</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="footer">
+          <div id="footer-bottom">
+            <span id="amount">总金额：</span>
+            <span v-text="total"></span>
+            <button @click="settlement">立即结算</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#box",
+        data() {
+          return {
+            total: 0,
+            shop: [
+              {
+                img: "https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00115128/10010028/1686126526-2397681161737908224-2397681161737908226-1_353x353_90.jpg",
+                price: 125,
+                oldprice: 399,
+                describe: "【Wee联名系列】大图卫衣可爱漫画少女宽松圆领套头卫衣",
+                stats: true,
+              },
+              {
+                img: "https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00115128/10010028/1325488806-3258150167626788864-3258150167626788866-1_353x353_90.jpg",
+                price: 306,
+                oldprice: 599,
+                describe:
+                  "学院风灰色百褶长裙2023年秋冬新款半身裙A摆挺括显瘦长半裙",
+                stats: true,
+              },
+              {
+                img: "https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00115128/10010028/1052937106-607781784834654208-607781784834654210-1_353x353_90.jpg",
+                price: 142,
+                oldprice: 399,
+                describe: "小香风短裙秋冬款百褶裙半身裙",
+                stats: true,
+              },
+              {
+                img: "https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00115128/10010028/79430255-1966742971290177536-1966742971290177538-1_353x353_90.jpg",
+                price: 626,
+                oldprice: 1899,
+                describe:
+                  "【100%羊毛】乐町简约双面呢大衣外套2023年冬季新款长款大衣",
+                stats: true,
+              },
+              {
+                img: "https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00115128/10010028/1354118874-3116568252257034240-3116568252257034242-1_353x353_90.jpg",
+                price: 74,
+                oldprice: 239,
+                describe: "【WEE联名】乐町咖色满印皮肤衣秋冬款商场同款打底衫",
+                stats: true,
+              },
+              {
+                img: "https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/115128/2023/0320/57/eddea57d-e6fc-46c7-9e17-8be831958bce_353x353_90.jpg",
+                price: 127,
+                oldprice: 329,
+                describe: "衬衫女设计感小众秋季女装蝴蝶结衬衫法式",
+                stats: true,
+              },
+              {
+                img: "https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00115128/10010028/603868279-1827975808875687936-1827975808875687938-1_353x353_90.jpg",
+                price: 299,
+                oldprice: 999,
+                describe: "简约轻软羽绒服冬季款加厚羽绒",
+                stats: true,
+              },
+              {
+                img: "https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00115128/10010028/2010389309-1619965801086869504-1619965801086869512-1_353x353_90.jpg",
+                price: 93,
+                oldprice: 299,
+                describe: "撞边打底衫秋冬字母半高领针织衫",
+                stats: true,
+              },
+            ],
+            shop1: [],
+          };
+        },
+        methods: {
+          addFun(index) {
+            this.shop1.push({
+              img: this.shop[index].img,
+              price: this.shop[index].price,
+              oldprice: this.shop[index].oldprice,
+              describe: this.shop[index].describe,
+              num: 1,
+              stats: this.shop[index].stats,
+            });
+            this.cont();
+          },
+          delFun(index) {
+            this.shop1.splice(index, 1);
+          },
+          cont() {
+            this.total = this.shop1.reduce((sum, item) => {
+              return sum + item.price * item.num;
+            }, 0);
+          },
+          minus(index) {
+            if (this.shop1[index].num == 1) {
+              return alert("买一件吧！");
+            }
+            this.shop1[index].num--;
+            if (this.shop1[0].stats) {
+              this.cont();
+            }
+          },
+          add(index) {
+            this.shop1[index].num++;
+            if (this.shop1[0].stats) {
+              this.cont();
+            }
+          },
+          check(index) {
+            this.shop1[index].stats = !this.shop1[index].stats;
+            if (!this.shop1[index].stats) {
+              this.total = this.total - this.shop1[index].price;
+            } else {
+              this.total = this.total + this.shop1[index].price;
+            }
+          },
+          settlement() {
+            this.shop1 = [];
+            alert(`您支付${this.total}元`);
+            this.total = 0;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
