@@ -338,6 +338,7 @@
           },
           delFun(index) {
             this.shop1.splice(index, 1);
+            this.cont();
           },
           cont() {
             this.total = this.shop1.reduce((sum, item) => {
